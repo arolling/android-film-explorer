@@ -6,6 +6,8 @@ import com.epicodus.filmexplorer.Constants;
 
 import org.parceler.Parcel;
 
+import java.util.HashMap;
+
 /**
  * Created by Guest on 4/27/16.
  */
@@ -18,7 +20,7 @@ public class Movie {
     public String mOverview;
     public String mPosterUrl;
     public String mBackdropUrl;
-    public int[] mGenreIDs;
+    public String[] mGenreNames;
     public String mReleaseDate;
     public double mVoteAverage;
 
@@ -34,7 +36,7 @@ public class Movie {
         this.mPosterUrl = makeImageUrl(poster);
         Log.v("poster: ", this.mPosterUrl);
         this.mBackdropUrl = makeImageUrl(backdrop);
-        this.mGenreIDs = genres;
+        this.mGenreNames = getGenreNames(genres);
         this.mReleaseDate = releaseDate;
         this.mVoteAverage = voteAverage;
     }
@@ -68,8 +70,8 @@ public class Movie {
         return mPosterUrl;
     }
 
-    public int[] getGenreIDs() {
-        return mGenreIDs;
+    public String[] getGenres() {
+        return mGenreNames;
     }
 
     public String getReleaseDate() {
@@ -78,6 +80,37 @@ public class Movie {
 
     public double getVoteAverage() {
         return mVoteAverage;
+    }
+
+    private String[] getGenreNames(int[] genreIds){
+        String[] genreNames = new String[genreIds.length];
+        HashMap<Integer, String> genreLookup = new HashMap<>();
+        genreLookup.put(28, "Action");
+        genreLookup.put(12, "Adventure");
+        genreLookup.put(16, "Animation");
+        genreLookup.put(35, "Comedy");
+        genreLookup.put(80, "Crime");
+        genreLookup.put(99, "Documentary");
+        genreLookup.put(10751, "Family");
+        genreLookup.put(14, "Fantasy");
+        genreLookup.put(10769, "Foreign");
+        genreLookup.put(36, "History");
+        genreLookup.put(27, "Horror");
+        genreLookup.put(10402, "Music");
+        genreLookup.put(9648, "Mystery");
+        genreLookup.put(10749, "Romance");
+        genreLookup.put(878, "Science Fiction");
+        genreLookup.put(10770, "TV Movie");
+        genreLookup.put(53, "Thriller");
+        genreLookup.put(10752, "War");
+        genreLookup.put(37, "Western");
+        genreLookup.put(18, "Drama");
+
+        for(int i = 0; i < genreIds.length; i++){
+            genreNames[i] = genreLookup.get(genreIds[i]);
+        }
+
+        return genreNames;
     }
 
 
