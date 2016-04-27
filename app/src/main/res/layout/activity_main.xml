@@ -11,7 +11,38 @@
     tools:context="com.epicodus.filmexplorer.ui.MainActivity">
 
     <TextView
-        android:text="Hello World!"
+        android:text="Search Movies By:"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/instructionsTextView"
+        android:textStyle="bold"
+        android:textSize="30sp" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner"
+        android:layout_below="@+id/instructionsTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="48dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/searchQuery"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <ImageButton
+        android:layout_width="200dp"
+        android:layout_height="111dp"
+        android:id="@+id/searchButton"
+        android:layout_marginTop="35dp"
+        android:src="@drawable/retro_movie_ticket"
+        style="?android:attr/borderlessButtonStyle"
+        android:scaleType="fitCenter"
+        android:layout_below="@+id/searchQuery"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
