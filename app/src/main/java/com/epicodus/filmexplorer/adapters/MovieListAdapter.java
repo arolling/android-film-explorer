@@ -23,6 +23,8 @@ import butterknife.ButterKnife;
  * Created by Guest on 4/27/16.
  */
 public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.MovieViewHolder> {
+    private static final int MAX_WIDTH = 600;
+    private static final int MAX_HEIGHT = 600;
     private ArrayList<Movie> mMovies = new ArrayList<>();
     private Context mContext;
 
@@ -34,8 +36,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
     @Override
     public MovieListAdapter.MovieViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_list_item, parent, false);
-        MovieViewHolder viewHolder = new MovieViewHolder(view);
-        return viewHolder;
+        return new MovieViewHolder(view);
     }
 
     @Override
@@ -68,7 +69,11 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
 
         public void bindMovie(Movie movie) {
             Log.v("poster url: ", movie.getPosterUrl());
-            Picasso.with(mContext).load(movie.getPosterUrl()).into(mMoviePosterView);
+            Picasso.with(mContext)
+                    .load(movie.getPosterUrl())
+                    .resize(MAX_WIDTH, MAX_HEIGHT)
+                    .centerInside()
+                    .into(mMoviePosterView);
             mTitleTextView.setText(movie.getTitle());
             mGenresTextView.setText(android.text.TextUtils.join(", ", movie.getGenres()));
             mRatingTextView.setText("Rating: " + movie.getVoteAverage() + "/10");
