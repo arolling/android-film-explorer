@@ -62,10 +62,9 @@ public class ResultListActivity extends AppCompatActivity {
 
                         ArrayAdapter adapter = new ArrayAdapter(ResultListActivity.this, android.R.layout.simple_list_item_1, movieTitles);
                         mListView.setAdapter(adapter);
-
+                        Log.d(TAG, "number: " + mMovies.size());
                         for (Movie movie : mMovies) {
-                            Log.d(TAG, "Title: " + movie.getTitle());
-                            Log.d(TAG, "Genre size: " + android.text.TextUtils.join(", ", movie.getGenres()));
+
                         }
                     }
                 });

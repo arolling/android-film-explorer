@@ -34,7 +34,6 @@ public class Movie {
         this.mMovieID = id;
         this.mOverview = overview;
         this.mPosterUrl = makeImageUrl(poster);
-        Log.v("poster: ", this.mPosterUrl);
         this.mBackdropUrl = makeImageUrl(backdrop);
         this.mGenreNames = getGenreNames(genres);
         this.mReleaseDate = releaseDate;
