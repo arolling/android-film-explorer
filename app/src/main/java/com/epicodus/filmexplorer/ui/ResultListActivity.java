@@ -65,7 +65,7 @@ public class ResultListActivity extends AppCompatActivity {
 
                         for (Movie movie : mMovies) {
                             Log.d(TAG, "Title: " + movie.getTitle());
-                            Log.d(TAG, "Genres: " + movie.getGenreIDs().toString());
+                            Log.d(TAG, "Genre size: " + movie.getGenreIDs().length);
                         }
                     }
                 });

@@ -17,26 +17,35 @@ public class Movie {
     public int mMovieID;
     public String mOverview;
     public String mPosterUrl;
-    public String mBackgroundUrl;
+    public String mBackdropUrl;
     public int[] mGenreIDs;
     public String mReleaseDate;
     public double mVoteAverage;
 
-//    public Movie(){
-//
-//    }
+    public Movie(){
+
+    }
 
 
-    public Movie(String title, int id, String overview, String poster, String background, int[] genres, String releaseDate, double voteAverage){
+    public Movie(String title, int id, String overview, String poster, String backdrop, int[] genres, String releaseDate, double voteAverage){
         this.mTitle = title;
         this.mMovieID = id;
         this.mOverview = overview;
-        this.mPosterUrl = Constants.IMAGE_BASE_URL + poster.substring(2);
+        this.mPosterUrl = makeImageUrl(poster);
         Log.v("poster: ", this.mPosterUrl);
-        this.mBackgroundUrl = Constants.IMAGE_BASE_URL + background.substring(2);
+        this.mBackdropUrl = makeImageUrl(backdrop);
         this.mGenreIDs = genres;
         this.mReleaseDate = releaseDate;
         this.mVoteAverage = voteAverage;
+    }
+
+    private String makeImageUrl(String imageFragment){
+        if(imageFragment.equals("null")){
+            return "http://paulabrown.net/coen-brothers-movies-with-steve-buscemi-210.png";
+        } else {
+            return Constants.IMAGE_BASE_URL + imageFragment.substring(1);
+        }
+
     }
 
     public String getTitle() {
@@ -51,8 +60,8 @@ public class Movie {
         return mOverview;
     }
 
-    public String getBackgroundUrl() {
-        return mBackgroundUrl;
+    public String getBackdropUrl() {
+        return mBackdropUrl;
     }
 
     public String getPosterUrl() {

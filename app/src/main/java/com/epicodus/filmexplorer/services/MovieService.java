@@ -65,10 +65,9 @@ public class MovieService {
                     String overview = filmJSON.getString("overview");
                     String release = filmJSON.getString("release_date"); // CHANGE TO DATE FORMAT????
                     JSONArray genreJSON = filmJSON.getJSONArray("genre_ids");
-
                     int[] genres = new int[genreJSON.length()];
                     for(int y = 0; y < genreJSON.length(); y++){
-                        genres[i] = Integer.parseInt(genreJSON.get(i).toString());
+                        genres[y] = Integer.parseInt(genreJSON.get(y).toString());
                     }
                     int id = filmJSON.getInt("id");
                     String title = filmJSON.getString("title");
