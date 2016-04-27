@@ -12,5 +12,8 @@ public class Constants {
     public static final String MULTI_SEARCH = "multi";
     public static final String API_QUERY = "api_key";
 
-    public static final String POSTER_BASE_URL = "http://image.tmdb.org/t/p/original/";
+    public static final String IMAGE_BASE_URL = "http://image.tmdb.org/t/p/original/";
+
+    public static final String PERSON_BASE_URL = "http://api.themoviedb.org/3/person/";
+    public static final String PERSON_CREDITS = "combined_credits";
 }
