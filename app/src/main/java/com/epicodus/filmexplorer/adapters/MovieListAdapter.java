@@ -2,6 +2,7 @@ package com.epicodus.filmexplorer.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,13 +26,13 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
     private ArrayList<Movie> mMovies = new ArrayList<>();
     private Context mContext;
 
-    public MovieListAdapter(Context context, ArrayList<Movie> movies){
+    public MovieListAdapter(Context context, ArrayList<Movie> movies) {
         mContext = context;
         mMovies = movies;
     }
 
     @Override
-    public MovieListAdapter.MovieViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
+    public MovieListAdapter.MovieViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_list_item, parent, false);
         MovieViewHolder viewHolder = new MovieViewHolder(view);
         return viewHolder;
@@ -48,10 +49,14 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
     }
 
     public class MovieViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.moviePosterImageView) ImageView mMoviePosterView;
-        @Bind(R.id.movieTitleTextView) TextView mTitleTextView;
-        @Bind(R.id.movieGenresTextView) TextView mGenresTextView;
-        @Bind(R.id.ratingTextView) TextView mRatingTextView;
+        @Bind(R.id.moviePosterImageView)
+        ImageView mMoviePosterView;
+        @Bind(R.id.movieTitleTextView)
+        TextView mTitleTextView;
+        @Bind(R.id.movieGenresTextView)
+        TextView mGenresTextView;
+        @Bind(R.id.ratingTextView)
+        TextView mRatingTextView;
         private Context mContext;
 
 
@@ -62,12 +67,11 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
         }
 
         public void bindMovie(Movie movie) {
+            Log.v("poster url: ", movie.getPosterUrl());
             Picasso.with(mContext).load(movie.getPosterUrl()).into(mMoviePosterView);
             mTitleTextView.setText(movie.getTitle());
             mGenresTextView.setText(android.text.TextUtils.join(", ", movie.getGenres()));
             mRatingTextView.setText("Rating: " + movie.getVoteAverage() + "/10");
         }
     }
-
-
 }
