@@ -9,6 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,8 @@ import butterknife.ButterKnife;
  * A simple {@link Fragment} subclass.
  */
 public class MovieDetailFragment extends Fragment {
+    public static final String TAG = MovieDetailFragment.class.getSimpleName();
+
     @Bind(R.id.overviewTextView) TextView mOverViewTextView;
     @Bind(R.id.detailRatingTextView) TextView mDetailRatingTextView;
     @Bind(R.id.releaseDateTextView) TextView mReleaseDateTextView;
@@ -87,14 +90,16 @@ public class MovieDetailFragment extends Fragment {
         mShareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                String message = "Checkout " + mMovie.getTitle();
-//                Intent intent = new Intent(Intent.ACTION_SEND);
-//                intent.setData(Uri.parse("smsto:"));  // This ensures only SMS apps respond
-//                intent.putExtra("sms_body", message);
-//                if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
-//                    startActivity(intent);
-//                }
-                Toast.makeText(getActivity(), "share btn clicked", Toast.LENGTH_SHORT).show();
+                String message = "Check out " + mMovie.getTitle();
+                Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+
+                intent.setData(Uri.parse("sms:2508932202"));  // This ensures only SMS apps respond
+                intent.putExtra("sms_body", message);
+                if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                    Log.v(TAG, "passed conditional");
+                    startActivity(intent);
+                }
             }
         });
 
