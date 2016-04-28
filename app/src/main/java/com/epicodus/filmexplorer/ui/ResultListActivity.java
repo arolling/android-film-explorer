@@ -39,14 +39,13 @@ public class ResultListActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String search = intent.getStringExtra("search");
-        String type = intent.getStringExtra("type");
-        searchDatabase(search, type);
+        searchDatabase(search);
     }
 
-    private void searchDatabase(String search, final String type){
+    private void searchDatabase(String search){
         final MovieService movieService = new MovieService();
 
-        movieService.searchMovies(search, type, new Callback() {
+        movieService.searchMovies(search, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
@@ -54,7 +53,6 @@ public class ResultListActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) {
-                if(type.equals("Title")){
                     mMovies = movieService.processMovies(response);
 
                     ResultListActivity.this.runOnUiThread(new Runnable() {
@@ -68,7 +66,7 @@ public class ResultListActivity extends AppCompatActivity {
                         }
                     });
                 }
-            }
+
         });
     }
 }

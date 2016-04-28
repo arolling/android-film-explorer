@@ -27,20 +27,15 @@ import okhttp3.Response;
 public class MovieService {
     public static final String TAG = MovieService.class.getSimpleName();
 
-    public void searchMovies(String search, String type, Callback callback){
+    public void searchMovies(String search, Callback callback){
         String MOVIE_API_KEY = Constants.MOVIE_API_KEY;
         String SEARCH_BASE_URL = Constants.SEARCH_BASE_URL;
 
         OkHttpClient client = new OkHttpClient();
 
         HttpUrl.Builder urlBuilder = HttpUrl.parse(SEARCH_BASE_URL).newBuilder();
-        if(type.equals("Title")){
-            urlBuilder.addPathSegment(Constants.TITLE_SEARCH);
-        } else if (type.equals("Person")){
-            urlBuilder.addPathSegment(Constants.PERSON_SEARCH);
-        } else if (type.equals("Keyword")){
-            urlBuilder.addPathSegment(Constants.MULTI_SEARCH);
-        }
+
+        urlBuilder.addPathSegment(Constants.TITLE_SEARCH);
 
         urlBuilder.addQueryParameter(Constants.MOVIE_QUERY, search);
         urlBuilder.addQueryParameter(Constants.API_QUERY, MOVIE_API_KEY);
