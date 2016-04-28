@@ -68,7 +68,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
         }
 
         public void bindMovie(Movie movie) {
-            Log.v("poster url: ", movie.getPosterUrl());
+            //Log.v("poster url: ", movie.getPosterUrl());
             Picasso.with(mContext)
                     .load(movie.getPosterUrl())
                     .resize(MAX_WIDTH, MAX_HEIGHT)

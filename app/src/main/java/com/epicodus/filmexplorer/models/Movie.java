@@ -6,6 +6,7 @@ import com.epicodus.filmexplorer.Constants;
 
 import org.parceler.Parcel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -13,8 +14,8 @@ import java.util.HashMap;
  */
 @Parcel
 public class Movie {
-
-
+    public ArrayList<Person> mDirectors;
+    public ArrayList<Person> mCast;
     public String mTitle;
     public int mMovieID;
     public String mOverview;
@@ -110,6 +111,23 @@ public class Movie {
         }
 
         return genreNames;
+    }
+
+    public ArrayList<Person> getDirectors() {
+        return mDirectors;
+    }
+
+    public ArrayList<Person> getCast() {
+        return mCast;
+
+    }
+
+    public void addCast(Person actor){
+        this.mCast.add(actor);
+    }
+
+    public void addDirector(Person crew){
+        this.mDirectors.add(crew);
     }
 
 

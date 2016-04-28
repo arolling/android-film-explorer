@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.epicodus.filmexplorer.Constants;
 import com.epicodus.filmexplorer.models.Movie;
+import com.epicodus.filmexplorer.models.Person;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -109,7 +110,7 @@ public class MovieService {
         return movies;
     }
 
-    public Movie getMovieCredits(Movie movie){
+    public void getMovieCredits(final Movie movie){
         int movieId = movie.getMovieID();
         searchCredits(movieId, new Callback() {
             @Override
@@ -118,17 +119,48 @@ public class MovieService {
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                try {
-                    String jsonData = response.body().string();
-                    if(response.isSuccessful()){
-                        Log.v(TAG, jsonData);
-                    }
-                } catch (IOException e){
-                    e.printStackTrace();
-                }
+            public void onResponse(Call call, Response response) {
+                processCredits(response, movie);
             }
         });
+    }
+
+    public Movie processCredits(Response response, Movie movie){
+        try{
+            String jsonData = response.body().string();
+            if(response.isSuccessful()){
+                JSONObject creditsJSON = new JSONObject(jsonData);
+                int filmId = movie.getMovieID();
+                JSONArray castJSON = creditsJSON.getJSONArray("cast");
+                JSONArray crewJSON = creditsJSON.getJSONArray("crew");
+                for (int i = 0; i < castJSON.length() && i < 4; i++){
+                    JSONObject actorJSON = castJSON.getJSONObject(i);
+                    String name = actorJSON.getString("name");
+                    int id = actorJSON.getInt("id");
+                    String profile_path = actorJSON.getString("profile_path");
+                    String characterName = actorJSON.getString("character");
+                    Person actor = new Person(name, id, profile_path, "cast");
+                    actor.addCharacter(filmId, characterName);
+                    movie.addCast(actor);
+                }
+                for (int j = 0; j < crewJSON.length(); j++){
+                    JSONObject supportJSON = crewJSON.getJSONObject(j);
+                    String job = supportJSON.getString("job");
+                    if (job.equals("Director")){
+                        String name = supportJSON.getString("name");
+                        int id = supportJSON.getInt("id");
+                        String profile_path = supportJSON.getString("profile_path");
+                        Person director = new Person(name, id, profile_path, "director");
+                        movie.addDirector(director);
+                    }
+                }
+            }
+        } catch (IOException e){
+            e.printStackTrace();
+        } catch (JSONException j){
+            j.printStackTrace();;
+        }
+        Log.v("movie star: ", movie.getCast().get(0).getName());
         return movie;
     }
 }

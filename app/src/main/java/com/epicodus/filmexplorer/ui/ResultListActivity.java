@@ -56,6 +56,7 @@ public class ResultListActivity extends AppCompatActivity {
             public void onResponse(Call call, Response response) {
                 if(type.equals("Title")){
                     mMovies = movieService.processMovies(response);
+
                     ResultListActivity.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -67,9 +68,6 @@ public class ResultListActivity extends AppCompatActivity {
                         }
                     });
                 }
-
-
-
             }
         });
     }
