@@ -33,6 +33,14 @@ public class Person {
         return mPicture;
     }
 
+    public String getType() {
+        return mType;
+    }
+
+    public HashMap<Integer, String> getCharacters() {
+        return mCharacters;
+    }
+
     public Person(String name, int id, String profile_path, String type){
         this.mName = name;
         this.mPersonID = id;

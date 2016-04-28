@@ -50,14 +50,10 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
     }
 
     public class MovieViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.moviePosterImageView)
-        ImageView mMoviePosterView;
-        @Bind(R.id.movieTitleTextView)
-        TextView mTitleTextView;
-        @Bind(R.id.movieGenresTextView)
-        TextView mGenresTextView;
-        @Bind(R.id.ratingTextView)
-        TextView mRatingTextView;
+        @Bind(R.id.moviePosterImageView) ImageView mMoviePosterView;
+        @Bind(R.id.movieTitleTextView) TextView mTitleTextView;
+        @Bind(R.id.movieGenresTextView) TextView mGenresTextView;
+        @Bind(R.id.ratingTextView) TextView mRatingTextView;
         private Context mContext;
 
 
