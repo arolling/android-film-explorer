@@ -160,7 +160,6 @@ public class MovieService {
         } catch (JSONException j){
             j.printStackTrace();;
         }
-        Log.v("movie star: ", movie.getCast().get(0).getName());
         return movie;
     }
 }

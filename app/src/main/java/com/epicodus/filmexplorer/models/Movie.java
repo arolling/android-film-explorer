@@ -39,6 +39,9 @@ public class Movie {
         this.mGenreNames = getGenreNames(genres);
         this.mReleaseDate = releaseDate;
         this.mVoteAverage = voteAverage;
+        this.mCast = new ArrayList<>();
+        this.mDirectors = new ArrayList<>();
+
     }
 
     private String makeImageUrl(String imageFragment){
