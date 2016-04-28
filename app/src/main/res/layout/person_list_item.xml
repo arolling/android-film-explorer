@@ -10,8 +10,7 @@
         android:layout_height="60dp"
         android:id="@+id/profileImageView"
         android:src="@drawable/panda"
-        android:scaleType="centerInside"
-        />
+        android:scaleType="centerInside" />
 
     <LinearLayout
         android:orientation="vertical"

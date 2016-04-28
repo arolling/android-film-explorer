@@ -133,7 +133,7 @@ public class MovieService {
                 int filmId = movie.getMovieID();
                 JSONArray castJSON = creditsJSON.getJSONArray("cast");
                 JSONArray crewJSON = creditsJSON.getJSONArray("crew");
-                for (int i = 0; i < castJSON.length() && i < 4; i++){
+                for (int i = 0; i < castJSON.length() && i < 8; i++){
                     JSONObject actorJSON = castJSON.getJSONObject(i);
                     String name = actorJSON.getString("name");
                     int id = actorJSON.getInt("id");
