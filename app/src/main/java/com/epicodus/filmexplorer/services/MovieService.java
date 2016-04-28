@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -27,11 +28,11 @@ public class MovieService {
 
     public void searchMovies(String search, String type, Callback callback){
         String MOVIE_API_KEY = Constants.MOVIE_API_KEY;
-        String MOVIE_BASE_URL = Constants.MOVIE_BASE_URL;
+        String SEARCH_BASE_URL = Constants.SEARCH_BASE_URL;
 
         OkHttpClient client = new OkHttpClient();
 
-        HttpUrl.Builder urlBuilder = HttpUrl.parse(MOVIE_BASE_URL).newBuilder();
+        HttpUrl.Builder urlBuilder = HttpUrl.parse(SEARCH_BASE_URL).newBuilder();
         if(type.equals("Title")){
             urlBuilder.addPathSegment(Constants.TITLE_SEARCH);
         } else if (type.equals("Person")){
@@ -46,7 +47,27 @@ public class MovieService {
         String url = urlBuilder.build().toString();
 
         Request request = new Request.Builder().url(url).build();
-        Log.v(TAG, "url: " + request);
+        Log.v(TAG, "search url: " + request);
+
+        Call call = client.newCall(request);
+        call.enqueue(callback);
+    }
+
+    public void searchCredits(int movieId, Callback callback){
+        String MOVIE_API_KEY = Constants.MOVIE_API_KEY;
+        String MOVIE_BASE_URL = Constants.MOVIE_BASE_URL;
+        String CREDITS_REQUEST = Constants.CREDITS_REQUEST;
+
+        OkHttpClient client = new OkHttpClient();
+
+        HttpUrl.Builder urlBuilder = HttpUrl.parse(MOVIE_BASE_URL).newBuilder();
+        urlBuilder.addPathSegment("" + movieId);
+        urlBuilder.addPathSegment(CREDITS_REQUEST);
+        urlBuilder.addQueryParameter(Constants.API_QUERY, MOVIE_API_KEY);
+
+        String url = urlBuilder.build().toString();
+        Request request = new Request.Builder().url(url).build();
+        Log.v(TAG, "credits url: " + request);
 
         Call call = client.newCall(request);
         call.enqueue(callback);
@@ -75,6 +96,7 @@ public class MovieService {
                     double voteAvg = filmJSON.getDouble("vote_average");
 
                     Movie movie = new Movie(title, id, overview, poster, backdrop, genres, release, voteAvg);
+                    getMovieCredits(movie);
                     movies.add(movie); // add checking for adult movies here if necessary
                 }
             }
@@ -85,5 +107,28 @@ public class MovieService {
         }
 
         return movies;
+    }
+
+    public Movie getMovieCredits(Movie movie){
+        int movieId = movie.getMovieID();
+        searchCredits(movieId, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                try {
+                    String jsonData = response.body().string();
+                    if(response.isSuccessful()){
+                        Log.v(TAG, jsonData);
+                    }
+                } catch (IOException e){
+                    e.printStackTrace();
+                }
+            }
+        });
+        return movie;
     }
 }

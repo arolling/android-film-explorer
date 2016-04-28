@@ -40,10 +40,10 @@ public class ResultListActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String search = intent.getStringExtra("search");
         String type = intent.getStringExtra("type");
-        searchMovies(search, type);
+        searchDatabase(search, type);
     }
 
-    private void searchMovies(String search, String type){
+    private void searchDatabase(String search, final String type){
         final MovieService movieService = new MovieService();
 
         movieService.searchMovies(search, type, new Callback() {
@@ -54,18 +54,21 @@ public class ResultListActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) {
-                mMovies = movieService.processMovies(response);
+                if(type.equals("Title")){
+                    mMovies = movieService.processMovies(response);
+                    ResultListActivity.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mAdapter = new MovieListAdapter(getApplicationContext(), mMovies);
+                            mRecyclerView.setAdapter(mAdapter);
+                            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ResultListActivity.this);
+                            mRecyclerView.setLayoutManager(layoutManager);
+                            mRecyclerView.setHasFixedSize(true);
+                        }
+                    });
+                }
 
-                ResultListActivity.this.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        mAdapter = new MovieListAdapter(getApplicationContext(), mMovies);
-                        mRecyclerView.setAdapter(mAdapter);
-                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ResultListActivity.this);
-                        mRecyclerView.setLayoutManager(layoutManager);
-                        mRecyclerView.setHasFixedSize(true);
-                    }
-                });
+
 
             }
         });
