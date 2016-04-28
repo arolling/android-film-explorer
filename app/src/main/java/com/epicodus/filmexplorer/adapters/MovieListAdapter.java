@@ -78,10 +78,6 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
         }
 
         public void bindMovie(Movie movie) {
-            if(movie.getDirectors().size() > 0){
-                Log.v("movie director: ", movie.getDirectors().get(0).getName());
-            }
-
             Picasso.with(mContext)
                     .load(movie.getPosterUrl())
                     .resize(MAX_WIDTH, MAX_HEIGHT)

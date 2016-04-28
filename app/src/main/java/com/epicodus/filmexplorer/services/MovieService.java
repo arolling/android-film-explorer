@@ -43,7 +43,7 @@ public class MovieService {
         String url = urlBuilder.build().toString();
 
         Request request = new Request.Builder().url(url).build();
-        Log.v(TAG, "search url: " + request);
+        //Log.v(TAG, "search url: " + request);
 
         Call call = client.newCall(request);
         call.enqueue(callback);
@@ -63,8 +63,6 @@ public class MovieService {
 
         String url = urlBuilder.build().toString();
         Request request = new Request.Builder().url(url).build();
-        Log.v(TAG, "credits url: " + request);
-
         Call call = client.newCall(request);
         call.enqueue(callback);
     }
@@ -93,7 +91,7 @@ public class MovieService {
 
                     Movie movie = new Movie(title, id, overview, poster, backdrop, genres, release, voteAvg);
                     getMovieCredits(movie);
-                    movies.add(movie); // add checking for adult movies here if necessary
+                    movies.add(movie);
                 }
             }
         } catch (IOException e){

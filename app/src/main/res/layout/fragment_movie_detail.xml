@@ -10,12 +10,31 @@
         android:layout_height="match_parent"
         android:background="@color/colorPrimary">
 
-        <ImageView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:id="@+id/backdropImageView"
-            android:src="@drawable/panda"
-            android:scaleType="centerCrop" />
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:id="@+id/backdropImageView"
+                android:src="@drawable/panda"
+                android:scaleType="centerCrop" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="@dimen/fab_margin"
+                android:clickable="true"
+                android:src="@drawable/ic_send_white_36dp"
+                android:layout_alignBottom="@+id/backdropImageView"
+                android:cropToPadding="false" />
+
+        </RelativeLayout>
+
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -105,4 +124,5 @@
 
         </LinearLayout>
     </LinearLayout>
+
 </FrameLayout>

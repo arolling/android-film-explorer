@@ -1,7 +1,11 @@
 package com.epicodus.filmexplorer.ui;
 
 
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.epicodus.filmexplorer.R;
 import com.epicodus.filmexplorer.adapters.PersonListAdapter;
@@ -37,6 +42,7 @@ public class MovieDetailFragment extends Fragment {
     private Movie mMovie;
     private static final int MAX_WIDTH = 400;
     private static final int MAX_HEIGHT = 300;
+    @Bind(R.id.fab) FloatingActionButton mShareButton;
 
     public static MovieDetailFragment newInstance(Movie movie) {
         MovieDetailFragment movieDetailFragment = new MovieDetailFragment();
@@ -77,6 +83,21 @@ public class MovieDetailFragment extends Fragment {
         RecyclerView.LayoutManager crewLayoutManager = new LinearLayoutManager(this.getContext());
         mDirectorRecyclerView.setLayoutManager(crewLayoutManager);
         mDirectorRecyclerView.setHasFixedSize(true);
+
+        mShareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                String message = "Checkout " + mMovie.getTitle();
+//                Intent intent = new Intent(Intent.ACTION_SEND);
+//                intent.setData(Uri.parse("smsto:"));  // This ensures only SMS apps respond
+//                intent.putExtra("sms_body", message);
+//                if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+//                    startActivity(intent);
+//                }
+                Toast.makeText(getActivity(), "share btn clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
         return view;
     }
