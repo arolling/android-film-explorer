@@ -94,7 +94,7 @@ public class MovieDetailFragment extends Fragment {
                 Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(Intent.ACTION_SENDTO);
 
-                intent.setData(Uri.parse("sms:2508932202"));  // This ensures only SMS apps respond
+                intent.setData(Uri.parse("sms:"));  // This ensures only SMS apps respond
                 intent.putExtra("sms_body", message);
                 if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
                     Log.v(TAG, "passed conditional");
