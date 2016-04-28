@@ -21,10 +21,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
-            android:paddingTop="20dp"
+            android:paddingTop="10dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:paddingBottom="20dp">
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4.5/5"
+                android:id="@+id/detailRatingTextView"
+                android:layout_alignTop="@+id/overviewTextView"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:layout_toRightOf="@+id/overviewTextView" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -36,24 +48,10 @@
                 android:textSize="14sp"
                 android:textColor="@color/colorPrimaryDark" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="4.5/5"
-                android:id="@+id/detailRatingTextView"
-                android:layout_alignTop="@+id/overviewTextView"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:textColor="@color/colorAccent"
-                android:textStyle="bold" />
         </RelativeLayout>
-        <LinearLayout
-            android:orientation="vertical"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="30dp"
-            android:paddingTop="20dp"
-            android:paddingRight="30dp">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -64,18 +62,32 @@
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="10dp"
-                android:gravity="center" />
+                android:gravity="left" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Genres"
                 android:id="@+id/detailGenresTextView"
+                android:layout_alignTop="@+id/releaseDateTextView"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:textColor="@color/colorTextIcons"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="10dp"
-                android:gravity="center"/>
+                android:gravity="right"/>
+
+        </RelativeLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingTop="20dp"
+            android:paddingRight="20dp">
+
+
 
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"

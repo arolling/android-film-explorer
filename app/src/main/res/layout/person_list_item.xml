@@ -6,8 +6,8 @@
     android:paddingBottom="5dp">
 
     <ImageView
-        android:layout_width="50dp"
-        android:layout_height="80dp"
+        android:layout_width="40dp"
+        android:layout_height="60dp"
         android:id="@+id/profileImageView"
         android:src="@drawable/panda"
         android:scaleType="centerInside"
@@ -36,13 +36,6 @@
             android:textSize="14sp"
             android:id="@+id/characterNameTextView"
             android:textStyle="italic" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Type"
-            android:id="@+id/typeTextView"
-            android:textColor="@color/colorAccent"/>
 
     </LinearLayout>
 

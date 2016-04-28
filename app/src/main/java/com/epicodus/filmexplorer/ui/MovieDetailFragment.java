@@ -35,6 +35,8 @@ public class MovieDetailFragment extends Fragment {
     private PersonListAdapter mCastAdapter;
     private PersonListAdapter mCrewAdapter;
     private Movie mMovie;
+    private static final int MAX_WIDTH = 400;
+    private static final int MAX_HEIGHT = 300;
 
     public static MovieDetailFragment newInstance(Movie movie) {
         MovieDetailFragment movieDetailFragment = new MovieDetailFragment();
@@ -57,10 +59,10 @@ public class MovieDetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_movie_detail, container, false);
         ButterKnife.bind(this, view);
 
-        Picasso.with(view.getContext()).load(mMovie.getBackdropUrl()).into(mBackdropImageView);
+        Picasso.with(view.getContext()).load(mMovie.getBackdropUrl()).resize(MAX_WIDTH, MAX_HEIGHT).centerInside().into(mBackdropImageView);
         mOverViewTextView.setText(mMovie.getOverview());
         mDetailRatingTextView.setText(Double.toString(mMovie.getVoteAverage()) + "/10");
-        mReleaseDateTextView.setText(mMovie.getReleaseDate());
+        mReleaseDateTextView.setText("Released: " + mMovie.getReleaseDate());
         mDetailGenresTextView.setText(android.text.TextUtils.join(", ", mMovie.getGenres()));
 
 

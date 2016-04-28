@@ -22,8 +22,8 @@ import butterknife.ButterKnife;
  * Created by Guest on 4/28/16.
  */
 public class PersonListAdapter extends RecyclerView.Adapter<PersonListAdapter.PersonViewHolder> {
-    private static final int MAX_WIDTH = 600;
-    private static final int MAX_HEIGHT = 600;
+    private static final int MAX_WIDTH = 250;
+    private static final int MAX_HEIGHT = 250;
     private ArrayList<Person> mPeople = new ArrayList<>();
     private Context mContext;
     private int mMovieid;
@@ -55,7 +55,6 @@ public class PersonListAdapter extends RecyclerView.Adapter<PersonListAdapter.Pe
         @Bind(R.id.profileImageView) ImageView mProfileImage;
         @Bind(R.id.nameTextView) TextView mNameTextView;
         @Bind(R.id.characterNameTextView) TextView mCharacterTextView;
-        @Bind(R.id.typeTextView) TextView mTypeTextView;
 
         public PersonViewHolder(View itemView){
             super(itemView);
@@ -67,10 +66,10 @@ public class PersonListAdapter extends RecyclerView.Adapter<PersonListAdapter.Pe
             if(person.getType().equals("cast")){
                 mCharacterTextView.setText(person.getCharacters().get(mMovieid));
             } else {
-                mTypeTextView.setText("Director");
+                mCharacterTextView.setText("Director");
             }
 
-            Picasso.with(mContext).load(person.getPicture()).into(mProfileImage);
+            Picasso.with(mContext).load(person.getPicture()).resize(MAX_WIDTH, MAX_HEIGHT).centerInside().into(mProfileImage);
             mNameTextView.setText(person.getName());
 
         }
